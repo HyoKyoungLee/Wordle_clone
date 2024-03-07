@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle 클론</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <header>
+      <div class="header-menu"><img src="asset/menu.svg" /></div>
       <div id="timer">00:00</div>
-      <!--스스로해보기-->
+      <div class="header-icons">
+        <div><img src="asset/question.svg" /></div>
+        <div><img src="asset/chart.svg" /></div>
+        <div><img src="asset/gear.svg" /></div>
+      </div>
     </header>
     <main>
       <div class="board-row row-0">
@@ -56,7 +61,42 @@
       </div>
     </main>
     <footer>
-      <!--나중에 해보기-->
+      <div class="key-row">
+        <div class="key-block" data-index="81">Q</div>
+        <div class="key-block" data-index="87">W</div>
+        <div class="key-block" data-index="69">E</div>
+        <div class="key-block" data-index="82">R</div>
+        <div class="key-block" data-index="84">T</div>
+        <div class="key-block" data-index="89">Y</div>
+        <div class="key-block" data-index="85">U</div>
+        <div class="key-block" data-index="73">I</div>
+        <div class="key-block" data-index="79">O</div>
+        <div class="key-block" data-index="80">P</div>
+      </div>
+      <div class="key-row">
+        <div class="key-block" data-index="65">A</div>
+        <div class="key-block" data-index="83">S</div>
+        <div class="key-block" data-index="68">D</div>
+        <div class="key-block" data-index="70">F</div>
+        <div class="key-block" data-index="71">G</div>
+        <div class="key-block" data-index="72">H</div>
+        <div class="key-block" data-index="74">J</div>
+        <div class="key-block" data-index="75">K</div>
+        <div class="key-block" data-index="76">L</div>
+      </div>
+      <div class="key-row">
+        <div class="key-block" data-index="13">ENTER</div>
+        <div class="key-block" data-index="90">Z</div>
+        <div class="key-block" data-index="88">X</div>
+        <div class="key-block" data-index="67">C</div>
+        <div class="key-block" data-index="86">V</div>
+        <div class="key-block" data-index="66">B</div>
+        <div class="key-block" data-index="78">N</div>
+        <div class="key-block" data-index="77">M</div>
+        <div class="key-block" data-index="8">
+          <img src="asset/back.svg" />
+        </div>
+      </div>
     </footer>
   </body>
   <script src="javascript/index.js"></script>

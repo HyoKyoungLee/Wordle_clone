@@ -1,0 +1,40 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.key-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 58px;
+  border: solid gray;
+  border-radius: 4px;
+  background-color: gray;
+  font-weight: bold;
+}
+
+.key-block[data-index="13"] {
+  width: 65px;
+}
+
+.key-block[data-index="8"] {
+  width: 65px;
+}
+
+.key-block[data-index="8"] img {
+  width: 40px;
+  height: 30px;
+}

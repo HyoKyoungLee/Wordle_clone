@@ -4,6 +4,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  margin-top: 20px;
 }
 
 .board-row {

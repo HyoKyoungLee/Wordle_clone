@@ -1,5 +1,3 @@
-const 정답 = "APPLE";
-
 let index = 0;
 let attemps = 0;
 let timer = 0;
@@ -23,8 +21,14 @@ function appStart() {
     displayGameover();
     clearInterval(timer);
   };
-  const handleEnterKey = () => {
+
+  const handleEnterKey = async () => {
     let 맞은_갯수 = 0;
+    //응답을 기다려서 answer에 넣는것
+    const 응답 = await fetch("/answer");
+    const 정답_객체 = await 응답.json();
+    const 정답 = 정답_객체.answer;
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attemps}${i}']`
@@ -45,28 +49,55 @@ function appStart() {
   const handleBackspace = () => {
     if (index > 0) {
       const preBlock = document.querySelector(
-        `.board-column[data-index='${attemps}${index - 1}']`
+        `.board-block[data-index='${attemps}${index - 1}']`
       );
       preBlock.innerText = "";
     }
     if (index !== 0) index -= 1;
   };
 
-  const handleKeydown = (event) => {
-    const key = event.key.toUpperCase();
-    const keyCode = event.keyCode;
+  const handleTextinput = (keyCode) => {
     const thisBlock = document.querySelector(
       `.board-block[data-index='${attemps}${index}']`
     );
 
-    if (event.key == "Backspace") handleBackspace();
+    if (keyCode === 8) handleBackspace();
     else if (index === 5) {
-      if (event.key === "Enter") handleEnterKey();
+      if (keyCode === 13) handleEnterKey();
       else return;
     } else if (65 <= keyCode && keyCode <= 90) {
-      thisBlock.innerText = key;
+      thisBlock.innerText = String.fromCharCode(keyCode);
       index += 1;
     }
+  };
+
+  const handleKeydown = (event) => {
+    const keyCode = event.keyCode;
+    console.log();
+
+    const thisKeyblock = document.querySelector(
+      `.key-block[data-index='${keyCode}']`
+    );
+
+    // 키보드 입력할 때 키보드 애니메이션 실행
+    thisKeyblock.animate(
+      [
+        {
+          backgroundColor: "#404040",
+          borderColor: "#404040",
+        },
+      ],
+      500
+    );
+
+    handleTextinput(keyCode);
+  };
+
+  const keyBlocks = document.querySelector("footer");
+
+  keyBlocks.onclick = function (event) {
+    const keyBlock = event.target.dataset.index;
+    handleTextinput(Number(keyBlock));
   };
 
   const startTimer = () => {
@@ -75,6 +106,11 @@ function appStart() {
     function setTime() {
       const 현재_시간 = new Date();
       const 흐른_시간 = new Date(현재_시간 - 시작_시간);
+      //팀장님 과제로 추가
+      // const 연도 = 현재_시간.getFullYear().toString();
+      // const 달 = (현재_시간.getMonth() + 1).toString().padStart(2, "0");
+      // const 날짜 = 현재_시간.getDate().toString().padStart(2, "0");
+      //팀장님 과제로 추가
       const 분 = 흐른_시간.getMinutes().toString().padStart(2, "0");
       const 초 = 흐른_시간.getSeconds().toString().padStart(2, "0");
       const timeH1 = document.querySelector("#timer");
