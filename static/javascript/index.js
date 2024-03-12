@@ -3,7 +3,15 @@ let attemps = 0;
 let timer = 0;
 
 function appStart() {
-  const displayGameover = () => {
+  const displayGameover = (animateBlock) => {
+    animateBlock.animate(
+      [
+        {
+          transform: "scale(1.5)",
+        },
+      ],
+      300
+    );
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
@@ -16,9 +24,9 @@ function appStart() {
     index = 0;
   };
 
-  const gameover = () => {
+  const gameover = (animateBlock) => {
     window.removeEventListener("keydown", handleKeydown);
-    displayGameover();
+    displayGameover(animateBlock);
     clearInterval(timer);
   };
 
@@ -42,7 +50,12 @@ function appStart() {
       else block.style.background = "#787C7E";
       block.style.color = "white";
     }
-    if (맞은_갯수 === 5) gameover();
+    if (맞은_갯수 === 5) {
+      const animateBlocks = document.querySelector(
+        `.board-row[data-index='${attemps}']`
+      );
+      gameover(animateBlocks);
+    }
     nextLine();
   };
 
