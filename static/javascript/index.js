@@ -31,26 +31,25 @@ function appStart() {
   };
 
   const handleEnterKey = async () => {
-    let 맞은_갯수 = 0;
-    //응답을 기다려서 answer에 넣는것
-    const 응답 = await fetch("/answer");
-    const 정답_객체 = await 응답.json();
-    const 정답 = 정답_객체.answer;
+    let correctAnswersCount = 0;
+    const response = await fetch("/answer");
+    const responseJson = await response.json();
+    const answer = responseJson.answer;
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attemps}${i}']`
       );
       const letter = block.innerText;
-      const 정답_글자 = 정답[i];
-      if (letter === 정답_글자) {
-        맞은_갯수 += 1;
+      const answerLetter = answer[i];
+      if (letter === answerLetter) {
+        correctAnswersCount += 1;
         block.style.background = "#6AAA64";
-      } else if (정답.includes(letter)) block.style.background = "#C9B458";
+      } else if (answer.includes(letter)) block.style.background = "#C9B458";
       else block.style.background = "#787C7E";
       block.style.color = "white";
     }
-    if (맞은_갯수 === 5) {
+    if (correctAnswersCount === 5) {
       const animateBlocks = document.querySelector(
         `.board-row[data-index='${attemps}']`
       );
@@ -114,20 +113,15 @@ function appStart() {
   };
 
   const startTimer = () => {
-    const 시작_시간 = new Date();
+    const startTime = new Date();
 
     function setTime() {
-      const 현재_시간 = new Date();
-      const 흐른_시간 = new Date(현재_시간 - 시작_시간);
-      //팀장님 과제로 추가
-      // const 연도 = 현재_시간.getFullYear().toString();
-      // const 달 = (현재_시간.getMonth() + 1).toString().padStart(2, "0");
-      // const 날짜 = 현재_시간.getDate().toString().padStart(2, "0");
-      //팀장님 과제로 추가
-      const 분 = 흐른_시간.getMinutes().toString().padStart(2, "0");
-      const 초 = 흐른_시간.getSeconds().toString().padStart(2, "0");
+      const currentTime = new Date();
+      const elapsedTime = new Date(currentTime - startTime);
+      const minutes = elapsedTime.getMinutes().toString().padStart(2, "0");
+      const seconds = elapsedTime.getSeconds().toString().padStart(2, "0");
       const timeH1 = document.querySelector("#timer");
-      timeH1.innerText = `${분}:${초}`;
+      timeH1.innerText = `${minutes}:${seconds}`;
     }
     timer = setInterval(setTime, 1000);
   };
