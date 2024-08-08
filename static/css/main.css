@@ -5,6 +5,7 @@ main {
   align-items: center;
   font-size: large;
   gap: 5px;
+  color: var(--text-color);
 }
 
 .board-row {
