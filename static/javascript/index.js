@@ -44,9 +44,9 @@ function appStart() {
       const answerLetter = answer[i];
       if (letter === answerLetter) {
         correctAnswersCount += 1;
-        block.style.background = "#6AAA64";
-      } else if (answer.includes(letter)) block.style.background = "#C9B458";
-      else block.style.background = "#787C7E";
+        block.style.background = "#ffbf00";
+      } else if (answer.includes(letter)) block.style.background = "#ffdc46";
+      else block.style.background = "#d4cfbe";
       block.style.color = "white";
     }
     if (correctAnswersCount === 5) {

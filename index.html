@@ -3,101 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wordle 클론</title>
-    <link rel="stylesheet" href="src/css/style.css" />
+    <title>Wordle</title>
+    <link rel="stylesheet" href="static/css/style.css" />
   </head>
   <body>
-    <header>
-      <div class="header-menu"><img src="src/asset/menu.svg" /></div>
-      <div id="timer">00:00</div>
-      <div class="header-icons">
-        <div><img src="src/asset/question.svg" /></div>
-        <div><img src="src/asset/chart.svg" /></div>
-        <div><img src="src/asset/gear.svg" /></div>
-      </div>
-    </header>
-    <main>
-      <div class="board-row" data-index="0">
-        <div class="board-block" data-index="00"></div>
-        <div class="board-block" data-index="01"></div>
-        <div class="board-block" data-index="02"></div>
-        <div class="board-block" data-index="03"></div>
-        <div class="board-block" data-index="04"></div>
-      </div>
-      <div class="board-row" data-index="1">
-        <div class="board-block" data-index="10"></div>
-        <div class="board-block" data-index="11"></div>
-        <div class="board-block" data-index="12"></div>
-        <div class="board-block" data-index="13"></div>
-        <div class="board-block" data-index="14"></div>
-      </div>
-      <div class="board-row" data-index="2">
-        <div class="board-block" data-index="20"></div>
-        <div class="board-block" data-index="21"></div>
-        <div class="board-block" data-index="22"></div>
-        <div class="board-block" data-index="23"></div>
-        <div class="board-block" data-index="24"></div>
-      </div>
-      <div class="board-row" data-index="3">
-        <div class="board-block" data-index="30"></div>
-        <div class="board-block" data-index="31"></div>
-        <div class="board-block" data-index="32"></div>
-        <div class="board-block" data-index="33"></div>
-        <div class="board-block" data-index="34"></div>
-      </div>
-      <div class="board-row" data-index="4">
-        <div class="board-block" data-index="40"></div>
-        <div class="board-block" data-index="41"></div>
-        <div class="board-block" data-index="42"></div>
-        <div class="board-block" data-index="43"></div>
-        <div class="board-block" data-index="44"></div>
-      </div>
-      <div class="board-row" data-index="5">
-        <div class="board-block" data-index="50"></div>
-        <div class="board-block" data-index="51"></div>
-        <div class="board-block" data-index="52"></div>
-        <div class="board-block" data-index="53"></div>
-        <div class="board-block" data-index="54"></div>
-      </div>
-    </main>
-    <footer>
-      <div class="key-row">
-        <div class="key-block" data-index="81">Q</div>
-        <div class="key-block" data-index="87">W</div>
-        <div class="key-block" data-index="69">E</div>
-        <div class="key-block" data-index="82">R</div>
-        <div class="key-block" data-index="84">T</div>
-        <div class="key-block" data-index="89">Y</div>
-        <div class="key-block" data-index="85">U</div>
-        <div class="key-block" data-index="73">I</div>
-        <div class="key-block" data-index="79">O</div>
-        <div class="key-block" data-index="80">P</div>
-      </div>
-      <div class="key-row">
-        <div class="key-block" data-index="65">A</div>
-        <div class="key-block" data-index="83">S</div>
-        <div class="key-block" data-index="68">D</div>
-        <div class="key-block" data-index="70">F</div>
-        <div class="key-block" data-index="71">G</div>
-        <div class="key-block" data-index="72">H</div>
-        <div class="key-block" data-index="74">J</div>
-        <div class="key-block" data-index="75">K</div>
-        <div class="key-block" data-index="76">L</div>
-      </div>
-      <div class="key-row">
-        <div class="key-block" data-index="13">ENTER</div>
-        <div class="key-block" data-index="90">Z</div>
-        <div class="key-block" data-index="88">X</div>
-        <div class="key-block" data-index="67">C</div>
-        <div class="key-block" data-index="86">V</div>
-        <div class="key-block" data-index="66">B</div>
-        <div class="key-block" data-index="78">N</div>
-        <div class="key-block" data-index="77">M</div>
-        <div class="key-block" data-index="8">
-          <img src="src/asset/back.svg" />
+    <div class="container">
+      <header>
+        <div class="header-icons">
+          <img src="static/asset/question.svg" />
         </div>
-      </div>
-    </footer>
+        <div id="timer">00:00</div>
+        <a
+          href="https://github.com/HyoKyoungLee/Wordle_clone"
+          class="header-icons"
+        >
+          <img src="static/asset/github-mark.svg" />
+        </a>
+      </header>
+      <main>
+        <div class="board-row" data-index="0">
+          <div class="board-block" data-index="00"></div>
+          <div class="board-block" data-index="01"></div>
+          <div class="board-block" data-index="02"></div>
+          <div class="board-block" data-index="03"></div>
+          <div class="board-block" data-index="04"></div>
+        </div>
+        <div class="board-row" data-index="1">
+          <div class="board-block" data-index="10"></div>
+          <div class="board-block" data-index="11"></div>
+          <div class="board-block" data-index="12"></div>
+          <div class="board-block" data-index="13"></div>
+          <div class="board-block" data-index="14"></div>
+        </div>
+        <div class="board-row" data-index="2">
+          <div class="board-block" data-index="20"></div>
+          <div class="board-block" data-index="21"></div>
+          <div class="board-block" data-index="22"></div>
+          <div class="board-block" data-index="23"></div>
+          <div class="board-block" data-index="24"></div>
+        </div>
+        <div class="board-row" data-index="3">
+          <div class="board-block" data-index="30"></div>
+          <div class="board-block" data-index="31"></div>
+          <div class="board-block" data-index="32"></div>
+          <div class="board-block" data-index="33"></div>
+          <div class="board-block" data-index="34"></div>
+        </div>
+        <div class="board-row" data-index="4">
+          <div class="board-block" data-index="40"></div>
+          <div class="board-block" data-index="41"></div>
+          <div class="board-block" data-index="42"></div>
+          <div class="board-block" data-index="43"></div>
+          <div class="board-block" data-index="44"></div>
+        </div>
+        <div class="board-row" data-index="5">
+          <div class="board-block" data-index="50"></div>
+          <div class="board-block" data-index="51"></div>
+          <div class="board-block" data-index="52"></div>
+          <div class="board-block" data-index="53"></div>
+          <div class="board-block" data-index="54"></div>
+        </div>
+      </main>
+      <footer>
+        <div class="key-row">
+          <div class="key-block" data-index="81">Q</div>
+          <div class="key-block" data-index="87">W</div>
+          <div class="key-block" data-index="69">E</div>
+          <div class="key-block" data-index="82">R</div>
+          <div class="key-block" data-index="84">T</div>
+          <div class="key-block" data-index="89">Y</div>
+          <div class="key-block" data-index="85">U</div>
+          <div class="key-block" data-index="73">I</div>
+          <div class="key-block" data-index="79">O</div>
+          <div class="key-block" data-index="80">P</div>
+        </div>
+        <div class="key-row">
+          <div class="key-block" data-index="65">A</div>
+          <div class="key-block" data-index="83">S</div>
+          <div class="key-block" data-index="68">D</div>
+          <div class="key-block" data-index="70">F</div>
+          <div class="key-block" data-index="71">G</div>
+          <div class="key-block" data-index="72">H</div>
+          <div class="key-block" data-index="74">J</div>
+          <div class="key-block" data-index="75">K</div>
+          <div class="key-block" data-index="76">L</div>
+        </div>
+        <div class="key-row">
+          <div class="key-block" data-index="13">ENTER</div>
+          <div class="key-block" data-index="90">Z</div>
+          <div class="key-block" data-index="88">X</div>
+          <div class="key-block" data-index="67">C</div>
+          <div class="key-block" data-index="86">V</div>
+          <div class="key-block" data-index="66">B</div>
+          <div class="key-block" data-index="78">N</div>
+          <div class="key-block" data-index="77">M</div>
+          <div class="key-block" data-index="8">
+            <img src="static/asset/back.svg" />
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
-  <script src="src/javascript/index.js"></script>
+  <script src="static/javascript/index.js"></script>
 </html>

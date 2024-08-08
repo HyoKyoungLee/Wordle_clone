@@ -2,9 +2,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid gray;
-  padding: 10px;
-  margin-bottom: 5px;
 }
 
 #timer {
@@ -12,33 +9,17 @@ header {
   justify-content: center;
   align-items: center;
   font-size: 30px;
-}
-
-.header-menu {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  width: 108px;
-}
-.header-menu img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
+  color: var(--text-color);
 }
 
 .header-icons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  width: 40px;
 }
 
 .header-icons img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 30px;
   height: 30px;
-  margin: 0 3px 0 3px;
 }

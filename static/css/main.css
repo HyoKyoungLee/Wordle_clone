@@ -3,8 +3,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: large;
   gap: 5px;
-  margin-top: 20px;
 }
 
 .board-row {
@@ -18,7 +18,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid gray;
+  border: 2px solid var(--main-color);
+  background-color: var(--back-color);
   width: 60px;
   height: 60px;
 }

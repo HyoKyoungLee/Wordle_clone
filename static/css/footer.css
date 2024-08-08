@@ -3,8 +3,8 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
   gap: 5px;
-  margin-top: 20px;
 }
 
 .key-row {
@@ -18,20 +18,19 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 58px;
-  border: solid gray;
+  width: 45px;
+  height: 63px;
   border-radius: 4px;
-  background-color: gray;
+  background-color: var(--main-color);
   font-weight: bold;
 }
 
 .key-block[data-index="13"] {
-  width: 65px;
+  width: 70px;
 }
 
 .key-block[data-index="8"] {
-  width: 65px;
+  width: 70px;
 }
 
 .key-block[data-index="8"] img {

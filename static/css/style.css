@@ -1,4 +1,6 @@
+@import "color-variables.css";
 @import "reset.css";
-@import "main.css";
+@import "container.css";
 @import "header.css";
+@import "main.css";
 @import "footer.css";
