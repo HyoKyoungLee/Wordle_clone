@@ -2,4 +2,7 @@
   --main-color: #ffbf00;
   --back-color: #ffe49337;
   --text-color: #846300;
+  --correct-block-color: #76ef7a;
+  --wrong-block-color: #ffdc46;
+  --not-included-block-color: #d4cfbe;
 }

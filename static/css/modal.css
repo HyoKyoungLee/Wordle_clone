@@ -1,0 +1,83 @@
+.modal {
+  /* display: block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: inherit;
+  height: 100%;
+}
+
+.modal-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  font-size: small;
+  background-color: white;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-header {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-header p {
+  font-weight: bold;
+  font-size: medium;
+  margin: 0 0 0 auto;
+}
+
+.modal-header button {
+  margin-left: auto;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+}
+
+.modal-contents-example {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 0;
+  border-top: 1px solid var(--text-color);
+  border-bottom: 1px solid var(--text-color);
+}
+
+.modal-example-title {
+  font-weight: bold;
+}
+
+.board-row-example {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.board-block-example {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--main-color);
+  background-color: var(--back-color);
+  width: 30px;
+  height: 30px;
+}
+
+#correct {
+  background-color: var(--correct-block-color);
+}
+
+#wrong {
+  background-color: var(--wrong-block-color);
+}
+
+#not-included {
+  background-color: var(--not-included-block-color);
+}

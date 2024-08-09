@@ -44,7 +44,7 @@ function appStart() {
       const answerLetter = answer[i];
       if (letter === answerLetter) {
         correctAnswersCount += 1;
-        block.style.background = "#ffbf00";
+        block.style.background = "#76ef7a";
       } else if (answer.includes(letter)) block.style.background = "#ffdc46";
       else block.style.background = "#d4cfbe";
       block.style.color = "white";
@@ -129,5 +129,20 @@ function appStart() {
 
   window.addEventListener("keydown", handleKeydown);
 }
+
+function displayModal() {
+  if (modal.style.visibility === "hidden") {
+    modal.style.visibility = "visible";
+  } else {
+    modal.style.visibility = "hidden";
+  }
+}
+
+const modal = document.querySelector(".modal");
+const modalOffButton = document.querySelector("#modal-offbutton");
+modalOffButton.addEventListener("click", displayModal);
+
+const modalOnButton = document.querySelector("#modal-onbutton");
+modalOnButton.addEventListener("click", displayModal);
 
 appStart();

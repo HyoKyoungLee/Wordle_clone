@@ -1,6 +1,7 @@
 @import "color-variables.css";
 @import "reset.css";
-@import "container.css";
 @import "header.css";
 @import "main.css";
 @import "footer.css";
+@import "modal.css";
+@import "container.css";

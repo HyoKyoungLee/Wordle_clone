@@ -8,13 +8,60 @@
   </head>
   <body>
     <div class="container">
+      <div class="modal">
+        <div class="modal-contents">
+          <div class="modal-header">
+            <p>게임 방법</p>
+            <button id="modal-offbutton">X</button>
+          </div>
+          <p>6번의 시도로 5글자의 영어 단어를 맞추는 게임입니다!</p>
+          <p>단어를 입력한 후 엔터를 입력하면 단어블록의 색상이 바뀝니다.</p>
+          <div class="modal-contents-example">
+            <h1 class="modal-example-title">예시</h1>
+            <div class="board-row-example">
+              <div class="board-block-example" id="correct">W</div>
+              <div class="board-block-example">E</div>
+              <div class="board-block-example">A</div>
+              <div class="board-block-example">R</div>
+              <div class="board-block-example">Y</div>
+            </div>
+            <p>글자와 위치까지 모두 맞춘 경우 W와 같이 주황색으로 바뀝니다.</p>
+            <div class="board-row-example">
+              <div class="board-block-example">P</div>
+              <div class="board-block-example" id="wrong">I</div>
+              <div class="board-block-example">L</div>
+              <div class="board-block-example">L</div>
+              <div class="board-block-example">S</div>
+            </div>
+            <p>
+              위치는 틀렸지만 글자만 맞춘 경우 I와 같이 노란색으로 바뀝니다.
+            </p>
+            <div class="board-row-example">
+              <div class="board-block-example">V</div>
+              <div class="board-block-example">A</div>
+              <div class="board-block-example">G</div>
+              <div class="board-block-example" id="not-included">U</div>
+              <div class="board-block-example">E</div>
+            </div>
+            <p>단어에 포함되지 않은 경우 U와 같이 회색으로 바뀝니다.</p>
+          </div>
+          <p>이 게임은 Wordle 게임을 따라한 Clone Coding 프로젝트입니다.</p>
+          <p>
+            원작 :
+            <a href="https://www.nytimes.com/games/wordle/index.html"
+              >Wordle Game</a
+            >
+          </p>
+        </div>
+      </div>
       <header>
-        <div class="header-icons">
+        <div class="header-icons" id="modal-onbutton">
           <img src="static/asset/question.svg" />
         </div>
         <div id="timer">00:00</div>
         <a
           href="https://github.com/HyoKyoungLee/Wordle_clone"
+          target="_blank"
           class="header-icons"
         >
           <img src="static/asset/github-mark.svg" />
