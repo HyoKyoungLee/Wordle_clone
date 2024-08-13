@@ -4,6 +4,27 @@ let timer = 0;
 let letterArray = [];
 
 function appStart() {
+  const shakeInvalidInput = () => {
+    const targetBlockRow = document.querySelector(
+      `.board-row[data-index='${attemps}']`
+    );
+
+    targetBlockRow.animate(
+      [
+        { transform: "translateX(0px)" },
+        { transform: "translateX(-10px)" },
+        { transform: "translateX(10px)" },
+        { transform: "translateX(-10px)" },
+        { transform: "translateX(10px)" },
+        { transform: "translateX(0px)" },
+      ],
+      {
+        duration: 500,
+        iterations: 1,
+      }
+    );
+  };
+
   function showToast(message) {
     const toast = document.querySelector(".toast");
     const toastContents = document.querySelector(".toast-contents");
@@ -81,6 +102,7 @@ function appStart() {
       nextLine();
     } else {
       showToast("단어만 입력 가능합니다! 😢");
+      shakeInvalidInput();
     }
   };
 
@@ -106,6 +128,7 @@ function appStart() {
         handleEnterKey();
       } else {
         showToast("5글자를 입력해주세요! 😢");
+        shakeInvalidInput();
       }
     } else if (65 <= keyCode && keyCode <= 90) {
       if (index < 5) {
