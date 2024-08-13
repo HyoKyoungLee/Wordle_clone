@@ -19,3 +19,14 @@
   text-align: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+
+#toast-contents-clear {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px;
+}
+
+#toast-contents-clear header {
+  font-weight: bold;
+}

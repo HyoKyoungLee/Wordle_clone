@@ -28,7 +28,7 @@ function appStart() {
   function showToast(message) {
     const toast = document.querySelector(".toast");
     const toastContents = document.querySelector(".toast-contents");
-    toastContents.textContent = message;
+    toastContents.innerHTML = message;
 
     toast.style.visibility = "visible";
     setTimeout(() => {
@@ -44,20 +44,29 @@ function appStart() {
     return response.ok;
   };
 
-  const displayGameover = (animateBlock) => {
-    animateBlock.animate(
-      [
-        {
-          transform: "scale(1.5)",
-        },
-      ],
-      300
-    );
-    const div = document.createElement("div");
-    div.innerText = "게임이 종료됐습니다.";
-    div.style =
-      "display:flex; justify-content:center; align-items:center;position:absoulte; top:40vh; left:45vw;";
-    document.body.appendChild(div);
+  const displayGameover = () => {
+    const timer = document.querySelector("#timer");
+
+    const setClearTime = () => {
+      const clearTime = timer.innerText;
+      const [minutes, seconds] = clearTime.split(":");
+      const formattedMinutes = parseInt(minutes, 10);
+      const formattedSeconds = parseInt(seconds, 10);
+
+      return formattedMinutes === 0
+        ? `${formattedSeconds}초`
+        : `${formattedMinutes}분 ${formattedSeconds}초`;
+    };
+    const toast = document.querySelector(".toast");
+    const toastContents = document.querySelector(".toast-contents");
+
+    const toastHeaderHTML = `<header>🎉 정답을 맞췄습니다! 🎉</header>`;
+    const toastAnswerHTML = `<p>정답: TRAIN</p>`;
+    const toastClearTimeHTML = `<p>소요시간: ${setClearTime()}</p>`;
+    const toastDivContent = `<div>${toastAnswerHTML}${toastClearTimeHTML}</div>`;
+    toastContents.innerHTML = `<div id="toast-contents-clear">${toastHeaderHTML}${toastDivContent}</div>`;
+
+    toast.style.visibility = "visible";
   };
 
   const nextLine = () => {
@@ -101,7 +110,7 @@ function appStart() {
       }
       nextLine();
     } else {
-      showToast("단어만 입력 가능합니다! 😢");
+      showToast("<p>단어만 입력 가능합니다! 😢</p>");
       shakeInvalidInput();
     }
   };
@@ -127,7 +136,7 @@ function appStart() {
       if (index === 5) {
         handleEnterKey();
       } else {
-        showToast("5글자를 입력해주세요! 😢");
+        showToast("<p>5글자를 입력해주세요! 😢</p>");
         shakeInvalidInput();
       }
     } else if (65 <= keyCode && keyCode <= 90) {
