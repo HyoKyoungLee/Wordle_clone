@@ -5,7 +5,7 @@
   width: inherit;
   position: fixed;
   top: 30px;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 .toast-contents {
