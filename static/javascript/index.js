@@ -3,7 +3,32 @@ let attemps = 0;
 let timer = 0;
 let letterArray = [];
 
-function appStart() {
+const appStart = async () => {
+  const checkWord = async (letter) => {
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${letter}`
+    );
+
+    return response.ok;
+  };
+
+  const getAnswer = async () => {
+    let isWordValid = false;
+    while (!isWordValid) {
+      let response = await fetch(
+        "https://random-word-api.herokuapp.com/word?length=5"
+      );
+      let responseJson = await response.json();
+      let responseString = responseJson[0];
+
+      isWordValid = await checkWord(responseString);
+
+      if (isWordValid) return responseString.toUpperCase();
+    }
+  };
+
+  const answer = await getAnswer();
+
   const shakeInvalidInput = () => {
     const targetBlockRow = document.querySelector(
       `.board-row[data-index='${attemps}']`
@@ -36,14 +61,6 @@ function appStart() {
     }, 2000);
   }
 
-  const checkWord = async (letter) => {
-    const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${letter}`
-    );
-
-    return response.ok;
-  };
-
   const displayGameover = () => {
     const timer = document.querySelector("#timer");
 
@@ -61,7 +78,7 @@ function appStart() {
     const toastContents = document.querySelector(".toast-contents");
 
     const toastHeaderHTML = `<header>🎉 정답을 맞췄습니다! 🎉</header>`;
-    const toastAnswerHTML = `<p>정답: TRAIN</p>`;
+    const toastAnswerHTML = `<p>정답: ${answer}</p>`;
     const toastClearTimeHTML = `<p>소요시간: ${setClearTime()}</p>`;
     const toastDivContent = `<div>${toastAnswerHTML}${toastClearTimeHTML}</div>`;
     toastContents.innerHTML = `<div id="toast-contents-clear">${toastHeaderHTML}${toastDivContent}</div>`;
@@ -86,9 +103,6 @@ function appStart() {
 
     if (checkWord_response) {
       let correctAnswersCount = 0;
-      const response = await fetch("/answer");
-      const responseJson = await response.json();
-      const answer = responseJson.answer;
       for (let i = 0; i < 5; i++) {
         const block = document.querySelector(
           `.board-block[data-index='${attemps}${i}']`
@@ -156,7 +170,6 @@ function appStart() {
       `.key-block[data-index='${keyCode}']`
     );
 
-    // 키보드 입력할 때 키보드 애니메이션 실행
     thisKeyblock.animate(
       [
         {
@@ -193,7 +206,7 @@ function appStart() {
   startTimer();
 
   window.addEventListener("keydown", handleKeydown);
-}
+};
 
 function displayModal() {
   if (modal.style.visibility === "hidden") {
