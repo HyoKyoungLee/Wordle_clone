@@ -189,9 +189,18 @@ const appStart = async () => {
         {
           backgroundColor: "#404040",
           borderColor: "#404040",
+          transform: "scale(0.9)",
+        },
+        {
+          backgroundColor: "#ffffff",
+          borderColor: "#cccccc",
+          transform: "scale(1)",
         },
       ],
-      500
+      {
+        duration: 250,
+        easing: "ease-out",
+      }
     );
 
     handleTextinput(keyCode);
