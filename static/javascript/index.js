@@ -63,6 +63,8 @@ const appStart = async () => {
 
   const displayGameover = (toastValue) => {
     window.removeEventListener("keydown", handleKeydown);
+    keyBlocks.removeEventListener("click", handleKeydown);
+    modalOnButton.removeEventListener("click", displayModal);
 
     const toast = document.querySelector(".toast");
     const toastContents = document.querySelector(".toast-contents");
