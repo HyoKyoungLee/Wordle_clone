@@ -61,7 +61,23 @@ const appStart = async () => {
     }, 2000);
   }
 
-  const displayGameover = () => {
+  const displayGameover = (toastValue) => {
+    window.removeEventListener("keydown", handleKeydown);
+
+    const toast = document.querySelector(".toast");
+    const toastContents = document.querySelector(".toast-contents");
+
+    toastContents.innerHTML = toastValue;
+    toast.style.visibility = "visible";
+    clearInterval(timer);
+  };
+
+  const onGameLoss = () => {
+    const toastHeaderHTML = `<header>6번의 기회를 모두 사용했습니다 😢</header>`;
+    displayGameover(toastHeaderHTML);
+  };
+
+  const onGameWin = () => {
     const timer = document.querySelector("#timer");
 
     const setClearTime = () => {
@@ -74,33 +90,26 @@ const appStart = async () => {
         ? `${formattedSeconds}초`
         : `${formattedMinutes}분 ${formattedSeconds}초`;
     };
-    const toast = document.querySelector(".toast");
-    const toastContents = document.querySelector(".toast-contents");
 
     const toastHeaderHTML = `<header>🎉 정답을 맞췄습니다! 🎉</header>`;
     const toastAnswerHTML = `<p>정답: ${answer}</p>`;
     const toastClearTimeHTML = `<p>소요시간: ${setClearTime()}</p>`;
     const toastDivContent = `<div>${toastAnswerHTML}${toastClearTimeHTML}</div>`;
-    toastContents.innerHTML = `<div id="toast-contents-clear">${toastHeaderHTML}${toastDivContent}</div>`;
-
-    toast.style.visibility = "visible";
+    const toastTotalContent = `<div id="toast-contents-clear">${toastHeaderHTML}${toastDivContent}</div>`;
+    displayGameover(toastTotalContent);
   };
 
   const nextLine = () => {
     letterArray = [];
     attemps += 1;
+    if (attemps > 5) {
+      onGameLoss();
+    }
     index = 0;
-  };
-
-  const gameover = (animateBlock) => {
-    window.removeEventListener("keydown", handleKeydown);
-    displayGameover(animateBlock);
-    clearInterval(timer);
   };
 
   const handleEnterKey = async () => {
     const checkWord_response = await checkWord(letterArray.join(""));
-
     if (checkWord_response) {
       let correctAnswersCount = 0;
       for (let i = 0; i < 5; i++) {
@@ -117,10 +126,7 @@ const appStart = async () => {
         block.style.color = "white";
       }
       if (correctAnswersCount === 5) {
-        const animateBlocks = document.querySelector(
-          `.board-row[data-index='${attemps}']`
-        );
-        gameover(animateBlocks);
+        onGameWin();
       }
       nextLine();
     } else {
