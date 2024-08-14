@@ -172,7 +172,13 @@ const appStart = async () => {
   };
 
   const handleKeydown = (event) => {
-    const keyCode = event.keyCode;
+    let keyCode;
+
+    if (event instanceof PointerEvent) {
+      keyCode = Number(event.target.dataset.index);
+    } else {
+      keyCode = event.keyCode;
+    }
 
     const thisKeyblock = document.querySelector(
       `.key-block[data-index='${keyCode}']`
@@ -192,11 +198,7 @@ const appStart = async () => {
   };
 
   const keyBlocks = document.querySelector("footer");
-
-  keyBlocks.onclick = function (event) {
-    const keyBlock = event.target.dataset.index;
-    handleTextinput(Number(keyBlock));
-  };
+  keyBlocks.addEventListener("click", handleKeydown);
 
   const startTimer = () => {
     const startTime = new Date();
