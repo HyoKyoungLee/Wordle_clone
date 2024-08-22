@@ -4,6 +4,17 @@ let timer = 0;
 let letterArray = [];
 
 const appStart = async () => {
+  const apiRequest = async (callback) => {
+    const loadingScreen = document.querySelector("#loading-screen");
+    loadingScreen.style.visibility = "visible";
+
+    const result = await callback();
+
+    loadingScreen.style.visibility = "hidden";
+
+    return result;
+  };
+
   const checkWord = async (letter) => {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${letter}`
@@ -27,7 +38,7 @@ const appStart = async () => {
     }
   };
 
-  const answer = await getAnswer();
+  const answer = await apiRequest(getAnswer);
 
   const shakeInvalidInput = () => {
     const targetBlockRow = document.querySelector(
@@ -111,7 +122,9 @@ const appStart = async () => {
   };
 
   const handleEnterKey = async () => {
-    const checkWord_response = await checkWord(letterArray.join(""));
+    const checkWord_response = await apiRequest(() =>
+      checkWord(letterArray.join(""))
+    );
     if (checkWord_response) {
       let correctAnswersCount = 0;
       for (let i = 0; i < 5; i++) {
