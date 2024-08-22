@@ -21,9 +21,10 @@
 }
 
 .modal-header {
-  margin-top: 15px;
+  margin: 15px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .modal-header p {
@@ -34,10 +35,9 @@
 
 .modal-header button {
   margin-left: auto;
-  border-radius: 50%;
-  border-color: transparent;
-  background-color: var(--main-color);
-  color: white;
+  width: 25px;
+  height: 25px;
+  background-image: url("../asset/modal-off-btn.svg");
   cursor: pointer;
 }
 
