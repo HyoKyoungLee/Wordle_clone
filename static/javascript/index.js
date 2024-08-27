@@ -80,7 +80,10 @@ const appStart = async () => {
     const toast = document.querySelector(".toast");
     const toastContents = document.querySelector(".toast-contents");
 
-    toastContents.innerHTML = toastValue;
+    const gameOverBtn = `<button id="reply-btn">게임 다시하기</button>`;
+    const toastContentsValue = toastValue + gameOverBtn;
+
+    toastContents.innerHTML = toastContentsValue;
     toast.style.visibility = "visible";
     clearInterval(timer);
   };
