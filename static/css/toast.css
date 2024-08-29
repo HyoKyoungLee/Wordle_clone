@@ -30,6 +30,9 @@
 #toast-contents-clear header {
   font-weight: bold;
 }
+#toast-contents-answer {
+  margin: 5px 0;
+}
 
 #reply-btn {
   background-color: var(--main-color);
