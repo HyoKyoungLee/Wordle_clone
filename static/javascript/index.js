@@ -49,7 +49,6 @@ const getAnswer = async () => {
 
 (async () => {
   answer = await apiRequest(getAnswer);
-  console.log(answer);
 })();
 
 const startTimer = () => {
@@ -213,8 +212,6 @@ const handleKeydown = (event) => {
 };
 
 const displayGameover = (toastValue) => {
-  // window.removeEventListener("keydown", handleKeydown);
-  // modalOnButton.removeEventListener("click", handleModalOn);
   isGameStopped = true;
 
   const toastContents = document.querySelector(".toast-contents");
@@ -280,7 +277,6 @@ const gameStart = async () => {
     isGameStopped = false;
     toast.style.visibility = "hidden";
     answer = await apiRequest(getAnswer);
-    console.log(answer);
   } else {
     isStart = true;
   }
