@@ -257,7 +257,7 @@ const gameStart = async () => {
   keyBlocks.addEventListener("click", handleKeydown);
   window.addEventListener("keydown", handleKeydown);
   const cleanAllBlock = () => {
-    for (let i = 0; i < attemps + 1; i++) {
+    for (let i = 0; i < attemps; i++) {
       for (let x = 0; x < 5; x++) {
         const block = document.querySelector(
           `.board-block[data-index='${i}${x}']`
