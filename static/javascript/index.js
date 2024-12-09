@@ -10,6 +10,14 @@ let isGameStopped = false;
 const keyBlocks = document.querySelector("footer");
 const toast = document.querySelector(".toast");
 
+const API_URL = "https://wordsapiv1.p.rapidapi.com/words/";
+const API_OPTION = {
+  method: "GET",
+  headers: {
+    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+    "x-rapidapi-key": "c0f74f441cmsh567cad65aabece8p1aad19jsn4142e09a557d",
+  },
+};
 const apiRequest = async (callback) => {
   const loadingScreen = document.querySelector("#loading-screen");
   isLoading = true;
@@ -23,28 +31,25 @@ const apiRequest = async (callback) => {
   return result;
 };
 
-const checkWord = async (letter) => {
-  const response = await fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${letter}`
-  );
+const isValidWord = async (letter) => {
+  const apiParams = `?letterPattern=%5E${letter.toLowerCase()}%24`;
 
-  return response.ok;
+  const response = await fetch(`${API_URL}${apiParams}`, API_OPTION);
+  const responseJson = await response.json();
+
+  return responseJson.results.total;
 };
 
 const getAnswer = async () => {
-  let isWordValid = false;
+  const apiParams =
+    "?random=true&letterPattern=%5E.{5}%24&lettersMin=5&lettersMax=5&partOfSpeech=verb";
 
-  while (!isWordValid) {
-    let response = await fetch(
-      "https://random-word-api.herokuapp.com/word?length=5"
-    );
-    let responseJson = await response.json();
-    let responseString = responseJson[0];
+  const response = await fetch(`${API_URL}${apiParams}`, API_OPTION);
 
-    isWordValid = await checkWord(responseString);
+  const responseJson = await response.json();
+  let responseWord = responseJson.word;
 
-    if (isWordValid) return responseString.toUpperCase();
-  }
+  return responseWord.toUpperCase();
 };
 
 (async () => {
@@ -124,10 +129,10 @@ function showToast(message) {
 }
 
 const handleEnterKey = async () => {
-  const checkWord_response = await apiRequest(() =>
-    checkWord(letterArray.join(""))
+  const isValidWord_response = await apiRequest(() =>
+    isValidWord(letterArray.join(""))
   );
-  if (checkWord_response) {
+  if (isValidWord_response) {
     let correctAnswersCount = 0;
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
