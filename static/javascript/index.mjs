@@ -1,3 +1,6 @@
+import { isValidWord, getAnswer } from "./api.mjs";
+import { GlobalState } from "./globals.mjs";
+
 let index = 0;
 let attemps = 0;
 let timer = null;
@@ -5,57 +8,16 @@ let elapsedTime = 0;
 let isStart = false;
 let answer = null;
 let letterArray = [];
-let isLoading = false;
 let isGameStopped = false;
 const keyBlocks = document.querySelector("footer");
 const toast = document.querySelector(".toast");
 
-const API_URL = "https://wordsapiv1.p.rapidapi.com/words/";
-const API_OPTION = {
-  method: "GET",
-  headers: {
-    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-    "x-rapidapi-key": "c0f74f441cmsh567cad65aabece8p1aad19jsn4142e09a557d",
-  },
-};
-const apiRequest = async (callback) => {
-  const loadingScreen = document.querySelector("#loading-screen");
-  isLoading = true;
-  loadingScreen.style.visibility = "visible";
-
-  const result = await callback();
-
-  loadingScreen.style.visibility = "hidden";
-  isLoading = false;
-
-  return result;
-};
-
-const isValidWord = async (letter) => {
-  const apiParams = `?letterPattern=%5E${letter.toLowerCase()}%24`;
-
-  const response = await fetch(`${API_URL}${apiParams}`, API_OPTION);
-  const responseJson = await response.json();
-
-  return responseJson.results.total;
-};
-
-const getAnswer = async () => {
-  const apiParams =
-    "?random=true&letterPattern=%5E.{5}%24&lettersMin=5&lettersMax=5&partOfSpeech=verb";
-
-  const response = await fetch(`${API_URL}${apiParams}`, API_OPTION);
-
-  const responseJson = await response.json();
-  let responseWord = responseJson.word;
-
-  return responseWord.toUpperCase();
-};
-
+// 익명함수로 정답 불러오기 실행
 (async () => {
-  answer = await apiRequest(getAnswer);
+  answer = await getAnswer();
 })();
 
+// 타이머 시작
 const startTimer = () => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60)
@@ -70,13 +32,14 @@ const startTimer = () => {
     timerDiv.innerText = formatTime(elapsedTime);
   };
   timer = setInterval(() => {
-    if (!isLoading) {
+    if (!GlobalState.isLoading) {
       elapsedTime += 1;
       updateTimer();
     }
   }, 1000);
 };
 
+// 백스페이스 눌렀을 때 메서드
 const handleBackspace = () => {
   if (index > 0) {
     const preBlock = document.querySelector(
@@ -88,6 +51,7 @@ const handleBackspace = () => {
   if (index !== 0) index -= 1;
 };
 
+// 잘못된 입력값을 넣었을 때 애니메이션
 const shakeInvalidInput = () => {
   const targetBlockRow = document.querySelector(
     `.board-row[data-index='${attemps}']`
@@ -109,6 +73,7 @@ const shakeInvalidInput = () => {
   );
 };
 
+// 다음 줄로 이동하는 코드
 const nextLine = () => {
   letterArray = [];
   attemps += 1;
@@ -118,6 +83,7 @@ const nextLine = () => {
   index = 0;
 };
 
+// 토스트 메시지를 보여줌
 function showToast(message) {
   const toastContents = document.querySelector(".toast-contents");
   toastContents.innerHTML = message;
@@ -128,10 +94,9 @@ function showToast(message) {
   }, 2000);
 }
 
+// 엔터키를 눌렀을 때 메서드
 const handleEnterKey = async () => {
-  const isValidWord_response = await apiRequest(() =>
-    isValidWord(letterArray.join(""))
-  );
+  const isValidWord_response = await isValidWord(letterArray.join(""));
   if (isValidWord_response) {
     let correctAnswersCount = 0;
     for (let i = 0; i < 5; i++) {
@@ -148,15 +113,18 @@ const handleEnterKey = async () => {
       block.style.color = "white";
     }
     if (correctAnswersCount === 5) {
+      attemps += 1;
       onGameWin();
+    } else {
+      nextLine();
     }
-    nextLine();
   } else {
     showToast("<p>단어만 입력 가능합니다! 😢</p>");
     shakeInvalidInput();
   }
 };
 
+// 텍스트를 입력했을 때 메서드
 const handleTextinput = (keyCode) => {
   const thisBlock = document.querySelector(
     `.board-block[data-index='${attemps}${index}']`
@@ -172,7 +140,7 @@ const handleTextinput = (keyCode) => {
     }
   } else if (65 <= keyCode && keyCode <= 90) {
     if (index < 5) {
-      charCode = String.fromCharCode(keyCode);
+      let charCode = String.fromCharCode(keyCode);
       thisBlock.innerText = charCode;
       letterArray.push(charCode);
       index += 1;
@@ -216,6 +184,7 @@ const handleKeydown = (event) => {
   handleTextinput(keyCode);
 };
 
+// 게임이 졌을 때
 const displayGameover = (toastValue) => {
   isGameStopped = true;
 
@@ -238,6 +207,7 @@ const onGameLoss = () => {
   displayGameover(toastHeaderHTML);
 };
 
+// 게임이 이겼을 때 실행
 const onGameWin = () => {
   const timer = document.querySelector("#timer");
 
@@ -258,6 +228,7 @@ const onGameWin = () => {
   displayGameover(toastTotalContent);
 };
 
+// 게임시작
 const gameStart = async () => {
   keyBlocks.addEventListener("click", handleKeydown);
   window.addEventListener("keydown", handleKeydown);
@@ -281,7 +252,7 @@ const gameStart = async () => {
     elapsedTime = 0;
     isGameStopped = false;
     toast.style.visibility = "hidden";
-    answer = await apiRequest(getAnswer);
+    answer = await getAnswer();
   } else {
     isStart = true;
   }
@@ -289,6 +260,7 @@ const gameStart = async () => {
   startTimer();
 };
 
+//  아래는 게임 방법 모달 관련 메서드
 const handleModalOn = () => {
   if (isGameStopped) return;
   modal.style.visibility = "visible";
